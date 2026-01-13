@@ -111,10 +111,10 @@ public class JSHandler {
 //            System.out.println(f.getLanguageName()+" "+f.getEngineName()+" "+f.getNames().toString());
 //        }
         ScriptEngineManager manager = new ScriptEngineManager();
-        engine = manager.getEngineByName("graal.js");
-        Bindings bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("polyglot.js.allowHostAccess", true);
-        bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
+        engine = manager.getEngineByName("JavaScript");
+//        Bindings bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
+//        bindings.put("polyglot.js.allowHostAccess", true);
+//        bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
 //        engine= GraalJSScriptEngine.create(null,
 //                Context.newBuilder("js")
 //                        .allowHostAccess(HostAccess.ALL)
@@ -127,9 +127,9 @@ public class JSHandler {
         setSpecialChar();
         /* java 8 work around */
         try {
-            engine.eval("load(\"nashorn:mozilla_compat.js\");");
+            engine.eval("load('nashorn:mozilla_compat.js');");
         } catch (ScriptException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         try {
             engine.eval("var _JSHandler = Java.type('me.exz.omniocular.handler.JSHandler');");
